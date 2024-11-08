@@ -1,17 +1,20 @@
 export const popup = () => {
-  // Требование 1: При клике на элемент с атрибутом [form-popup-cta-trigger]
+  // Требование 1: Открытие всплывающего окна при клике на триггер с атрибутом form-popup-cta-trigger
   const triggers = document.querySelectorAll<HTMLElement>('[form-popup-cta-trigger]');
-  triggers.forEach(function (trigger) {
-    trigger.addEventListener('click', function () {
-      const popup = document.querySelector<HTMLElement>('[form-popup-wrapper="form-fr"]');
-      if (popup) {
-        popup.style.display = 'flex';
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const popupName = trigger.getAttribute('form-popup-cta-trigger');
+      if (popupName) {
+        const popup = document.querySelector<HTMLElement>(`[form-popup-wrapper="${popupName}"]`);
+        if (popup) {
+          popup.style.display = 'flex';
+        }
       }
     });
   });
 
-  // Требование 2: Показать элемент спустя 15 секунд после загрузки страницы
-  setTimeout(function () {
+  // Требование 2: Показать discount popup спустя 15 секунд после загрузки страницы
+  setTimeout(() => {
     const discountPopup = document.querySelector<HTMLElement>(
       '[form-popup-wrapper="form-discount"]'
     );
@@ -24,8 +27,8 @@ export const popup = () => {
   const closeElements = document.querySelectorAll(
     '[form-popup-close-area], [form-popup-close-button]'
   );
-  closeElements.forEach(function (element) {
-    element.addEventListener('click', function () {
+  closeElements.forEach((element) => {
+    element.addEventListener('click', () => {
       const popupWrapper = element.closest<HTMLElement>('[form-popup-wrapper]');
       if (popupWrapper) {
         popupWrapper.style.display = 'none';
