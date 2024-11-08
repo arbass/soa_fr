@@ -3,7 +3,7 @@ name: Purge jsDelivr Cache
 on:
   push:
     branches:
-      - my-feature-branch
+      - main
   workflow_dispatch:
 
 jobs:
